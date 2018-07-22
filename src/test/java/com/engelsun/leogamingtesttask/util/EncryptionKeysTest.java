@@ -1,13 +1,11 @@
 package com.engelsun.leogamingtesttask.util;
 
 import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 public class EncryptionKeysTest {
     @Test
