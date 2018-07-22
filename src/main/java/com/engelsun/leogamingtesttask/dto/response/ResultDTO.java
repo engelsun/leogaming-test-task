@@ -1,6 +1,8 @@
 package com.engelsun.leogamingtesttask.dto.response;
 
 import com.engelsun.leogamingtesttask.dto.AttributeDTO;
+import lombok.Builder;
+import lombok.Data;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -9,6 +11,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
+@Data
+@Builder
 @XmlRootElement(name = "result")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ResultDTO {
@@ -25,7 +29,7 @@ public class ResultDTO {
     private Integer code;
 
     @XmlAttribute(name = "final")
-    private Integer fianle;
+    private Integer finale;
 
     @XmlAttribute
     private Integer trans;

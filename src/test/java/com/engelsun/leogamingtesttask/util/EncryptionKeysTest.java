@@ -19,5 +19,4 @@ public class EncryptionKeysTest {
         PrivateKey privateKey = EncryptionKeys.getPrivate();
         assertNotNull(privateKey);
     }
-
 }
