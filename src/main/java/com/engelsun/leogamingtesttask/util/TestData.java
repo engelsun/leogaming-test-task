@@ -24,7 +24,8 @@ public class TestData {
             .check(999)
             .service(4390)
             .account("12345")
-            .date(ZonedDateTime.parse("2018-07-23T08:38:10+03:00"))
+//            .date(ZonedDateTime.parse("2018-07-23T08:38:10+03:00"))
+            .date(ZonedDateTime.now())
             .build();
     public static PaymentDTO paymentDTO2 = PaymentDTO.builder()
             .id(2L)
@@ -32,7 +33,8 @@ public class TestData {
             .check(1000)
             .service(4390)
             .account("12346")
-            .date(ZonedDateTime.parse("2018-07-23T08:38:10+03:00"))
+//            .date(ZonedDateTime.parse("2018-07-23T08:38:10+03:00"))
+            .date(ZonedDateTime.now())
             .build();
 
     public static StatusDTO statusDTO1 = StatusDTO.builder()
@@ -49,7 +51,8 @@ public class TestData {
             .code(0)
             .finale(1)
             .trans(123456789)
-            .serverTime(ZonedDateTime.parse("2018-07-23T08:38:10+03:00"))
+//            .serverTime(ZonedDateTime.parse("2018-07-23T08:38:10+03:00"))
+            .serverTime(ZonedDateTime.now())
             .build();
     public static ResultDTO resultDTO2 = ResultDTO.builder()
             .id(2L)
@@ -58,7 +61,8 @@ public class TestData {
             .code(30)
             .finale(1)
             .trans(123456799)
-            .serverTime(ZonedDateTime.parse("2018-07-23T08:38:10+03:00"))
+//            .serverTime(ZonedDateTime.parse("2018-07-23T08:38:10+03:00"))
+            .serverTime(ZonedDateTime.now())
             .build();
 
     public static RequestDTO requestVerifyDTO = RequestDTO.builder()

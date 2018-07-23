@@ -1,4 +1,5 @@
 input-data:
   url: https://test.lgaming.net/external/extended
+  header: PayLogic-Signature
   point: 327
   service: 4390

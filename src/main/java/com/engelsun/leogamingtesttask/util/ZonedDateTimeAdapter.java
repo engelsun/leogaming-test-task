@@ -5,7 +5,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class ZonedDateTimeAdapter extends XmlAdapter<String, ZonedDateTime> {
-    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZ");
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssZ");
 
     @Override
     public ZonedDateTime unmarshal(String v) throws Exception {

@@ -2,7 +2,9 @@ package com.engelsun.leogamingtesttask.service;
 
 import com.engelsun.leogamingtesttask.dto.request.RequestDTO;
 import com.engelsun.leogamingtesttask.dto.response.ResponseDTO;
+import com.engelsun.leogamingtesttask.util.Logger;
 import com.engelsun.leogamingtesttask.util.Marshaller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -19,35 +21,48 @@ public class RequestDispatcherService {
     @Value("${input-data.url}")
     private String URL;
 
-    @Autowired
+    @Value("${input-data.header}")
+    private String HEADER;
+
     private EncryptionService encryptionService;
+    private RestTemplate restTemplate;
+    private ResponseHandler responseHandler;
 
     @Autowired
-    private RestTemplate restTemplate;
+    public RequestDispatcherService(EncryptionService encryptionService, RestTemplate restTemplate, ResponseHandler responseHandler) {
+        this.encryptionService = encryptionService;
+        this.restTemplate = restTemplate;
+        this.responseHandler = responseHandler;
+    }
 
     public ResponseDTO redirect(RequestDTO requestDTO) throws SignatureException {
-        String request = Marshaller.requestToString(requestDTO);
-        String massage = encryptionService.sign(request);
+        String massage = Marshaller.requestToString(requestDTO);
+        String signature = encryptionService.sign(massage);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("PayLogic-Signature", massage);
-        headers.setContentType(MediaType.APPLICATION_XML);
+        printRequest(massage, signature);
 
-        HttpEntity<String> requestEntity = new HttpEntity<>(request, headers);
+        HttpEntity<String> requestEntity = makeRequestEntity(massage, signature);
 
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(
                 URL,
                 requestEntity,
-                String.class
-        );
-        ResponseDTO responseDTO;
-        if (responseEntity.hasBody()) {
-            String body = responseEntity.getBody();
-            System.out.println(" response " + body);
-            responseDTO = Marshaller.stringToResponse(body);
-            System.out.println("responedtO = " + responseDTO);
-            return responseDTO;
-        }
-        return null;
+                String.class);
+
+        return responseHandler.handle(responseEntity);
+    }
+
+    private HttpEntity<String> makeRequestEntity(String request, String signature) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HEADER, signature);
+        headers.setContentType(MediaType.APPLICATION_XML);
+
+        return new HttpEntity<>(request, headers);
+    }
+
+    private void printRequest(String request, String signature) {
+        Logger.info("#################################################");
+        Logger.info("# REQUEST SIGNATURE: " + signature);
+        Logger.info("####  REQUEST:  ####################################");
+        Logger.info(request);
     }
 }

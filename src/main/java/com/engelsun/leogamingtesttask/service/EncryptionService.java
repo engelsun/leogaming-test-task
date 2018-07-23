@@ -2,7 +2,6 @@ package com.engelsun.leogamingtesttask.service;
 
 import com.engelsun.leogamingtesttask.util.EncryptionKeys;
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.security.Signature;

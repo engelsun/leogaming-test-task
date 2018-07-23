@@ -10,6 +10,14 @@ import java.io.StringReader;
 import java.io.StringWriter;
 
 public class Marshaller {
+    public static RequestDTO stringToRequest(String massage) {
+        return JAXB.unmarshal(new StringReader(massage), RequestDTO.class);
+    }
+
+    public static ResponseDTO stringToResponse(String massage) {
+        return JAXB.unmarshal(new StringReader(massage), ResponseDTO.class);
+    }
+
     public static String requestToString(RequestDTO requestDTO) {
         return marshal(requestDTO, RequestDTO.class);
     }
@@ -34,13 +42,5 @@ public class Marshaller {
             e.printStackTrace();
         }
         return xmlString;
-    }
-
-    public static RequestDTO stringToRequest(String massage) {
-        return JAXB.unmarshal(new StringReader(massage), RequestDTO.class);
-    }
-
-    public static ResponseDTO stringToResponse(String massage) {
-        return JAXB.unmarshal(new StringReader(massage), ResponseDTO.class);
     }
 }
