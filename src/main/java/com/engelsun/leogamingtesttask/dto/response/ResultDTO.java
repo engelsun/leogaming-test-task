@@ -1,6 +1,7 @@
 package com.engelsun.leogamingtesttask.dto.response;
 
 import com.engelsun.leogamingtesttask.dto.AttributeDTO;
+import com.engelsun.leogamingtesttask.util.ZonedDateTimeAdapter;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,6 +10,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 @Data
@@ -47,7 +50,8 @@ public class ResultDTO {
     private Integer sumProv;
 
     @XmlAttribute(name = "server_time")
-    private String serverTime;
+    @XmlJavaTypeAdapter(ZonedDateTimeAdapter.class)
+    private ZonedDateTime serverTime;
 
     @XmlElement(name = "attribute")
     private List<AttributeDTO> attributeDTO;

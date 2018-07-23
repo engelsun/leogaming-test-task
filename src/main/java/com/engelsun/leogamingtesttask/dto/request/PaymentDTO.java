@@ -1,11 +1,14 @@
 package com.engelsun.leogamingtesttask.dto.request;
 
+import com.engelsun.leogamingtesttask.util.ZonedDateTimeAdapter;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.time.ZonedDateTime;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -28,5 +31,6 @@ public class PaymentDTO extends RequestBodyDTO {
     private String account;
 
     @XmlAttribute
-    private String date;
+    @XmlJavaTypeAdapter(ZonedDateTimeAdapter.class)
+    private ZonedDateTime date;
 }

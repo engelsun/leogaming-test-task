@@ -8,6 +8,7 @@ import com.engelsun.leogamingtesttask.dto.response.ResponseDTO;
 import com.engelsun.leogamingtesttask.dto.response.ResultDTO;
 import org.junit.Test;
 
+import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 
@@ -26,7 +27,7 @@ public class MarshallerTest {
             .check(999)
             .service(4390)
             .account("12345")
-            .date("2007-10-12T12:00:00+0300")
+            .date(ZonedDateTime.parse("2018-07-23T08:38:10+03:00"))
             .build();
     private PaymentDTO paymentDTO2 = PaymentDTO.builder()
             .id(2L)
@@ -34,7 +35,7 @@ public class MarshallerTest {
             .check(1000)
             .service(4390)
             .account("12346")
-            .date("2007-10-13T12:00:00+0300")
+            .date(ZonedDateTime.parse("2018-07-23T08:38:10+03:00"))
             .build();
 
     private StatusDTO statusDTO1 = StatusDTO.builder()
@@ -51,7 +52,7 @@ public class MarshallerTest {
             .code(0)
             .finale(1)
             .trans(123456789)
-            .serverTime("2007-10-12T12:00:00+0300")
+            .serverTime(ZonedDateTime.parse("2018-07-23T08:38:10+03:00"))
             .build();
     private ResultDTO resultDTO2 = ResultDTO.builder()
             .id(2L)
@@ -60,7 +61,7 @@ public class MarshallerTest {
             .code(30)
             .finale(1)
             .trans(123456799)
-            .serverTime("2007-10-13T12:00:00+0300")
+            .serverTime(ZonedDateTime.parse("2018-07-23T08:38:10+03:00"))
             .build();
 
     private RequestDTO requestVerifyDTO = RequestDTO.builder()
