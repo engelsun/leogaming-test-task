@@ -1,11 +1,8 @@
 package com.engelsun.leogamingtesttask;
 
 import com.engelsun.leogamingtesttask.service.RequestDispatcherService;
-import com.engelsun.leogamingtesttask.service.ResponseHandler;
-import com.engelsun.leogamingtesttask.util.Logger;
 import com.engelsun.leogamingtesttask.util.PrettyPrintResponse;
 import com.engelsun.leogamingtesttask.util.TestData;
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -26,10 +23,14 @@ public class Main implements CommandLineRunner {
         SpringApplication.run(Main.class, args);
     }
 
+    /**
+     * Main method in which {@link RequestDispatcherService} sends requests three times at
+     * that in the following order: verify -> payment -> status
+     */
     @Override
     public void run(String... args) throws Exception {
         RequestDispatcherService service = context.getBean(RequestDispatcherService.class);
-        
+
 //                  PRINT RAW RESPONSE
 //        service.redirect(TestData.requestVerifyDTO);
 //        service.redirect(TestData.requestPaymentDTO);

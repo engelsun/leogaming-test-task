@@ -1,5 +1,6 @@
 package com.engelsun.leogamingtesttask.util;
 
+import com.engelsun.leogamingtesttask.service.EncryptionService;
 import org.apache.tomcat.util.codec.binary.Base64;
 
 import java.io.IOException;
@@ -14,6 +15,9 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
+/**
+ * Util class that reads keys from files for {@link EncryptionService} class
+ */
 public class EncryptionKeys {
     private static final String PUBLIC_KEY_FILE = "public.pem";
     private static final String PRIVATE_KEY_FILE = "private.pem";

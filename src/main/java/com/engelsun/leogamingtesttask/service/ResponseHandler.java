@@ -13,6 +13,10 @@ import org.springframework.stereotype.Service;
 import java.security.SignatureException;
 import java.util.Optional;
 
+/**
+ * Service class that provides handle of responses from remote server and
+ * returns handled response to {@link RequestDispatcherService} class
+ */
 @Service
 public class ResponseHandler {
     @Autowired

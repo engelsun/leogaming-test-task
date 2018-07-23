@@ -1,5 +1,7 @@
 package com.engelsun.leogamingtesttask.service;
 
+import com.engelsun.leogamingtesttask.Main;
+import com.engelsun.leogamingtesttask.controller.TestController;
 import com.engelsun.leogamingtesttask.dto.request.RequestDTO;
 import com.engelsun.leogamingtesttask.dto.response.ResponseDTO;
 import com.engelsun.leogamingtesttask.util.Logger;
@@ -16,6 +18,10 @@ import org.springframework.web.client.RestTemplate;
 
 import java.security.SignatureException;
 
+/**
+ * Service class that provides requests redirection from {@link TestController} class
+ * or sends data from {@link Main} class to remote server
+ */
 @Service
 public class RequestDispatcherService {
 

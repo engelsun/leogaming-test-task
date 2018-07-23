@@ -3,6 +3,7 @@ package com.engelsun.leogamingtesttask.controller;
 import com.engelsun.leogamingtesttask.dto.request.RequestDTO;
 import com.engelsun.leogamingtesttask.dto.response.ResponseDTO;
 import com.engelsun.leogamingtesttask.service.RequestDispatcherService;
+import com.engelsun.leogamingtesttask.util.PrettyPrintResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +24,6 @@ public class TestController {
 
     @PostMapping(path = "/accept", produces = "application/xml")
     public ResponseDTO accept(@RequestBody RequestDTO requestDTO) throws SignatureException {
-        return requestDispatcherService.redirect(requestDTO);
+        return requestDispatcherService.redirect(requestDTO, PrettyPrintResponse.TRUE);
     }
 }
