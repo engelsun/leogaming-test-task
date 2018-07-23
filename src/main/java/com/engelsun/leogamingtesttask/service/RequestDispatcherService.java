@@ -4,6 +4,7 @@ import com.engelsun.leogamingtesttask.dto.request.RequestDTO;
 import com.engelsun.leogamingtesttask.dto.response.ResponseDTO;
 import com.engelsun.leogamingtesttask.util.Logger;
 import com.engelsun.leogamingtesttask.util.Marshaller;
+import com.engelsun.leogamingtesttask.util.PrettyPrintResponse;
 import com.engelsun.leogamingtesttask.util.Props;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -30,6 +31,10 @@ public class RequestDispatcherService {
     }
 
     public ResponseDTO redirect(RequestDTO requestDTO) throws SignatureException {
+        return redirect(requestDTO, PrettyPrintResponse.FALSE);
+    }
+
+    public ResponseDTO redirect(RequestDTO requestDTO, PrettyPrintResponse prettyPrintResponse) throws SignatureException {
         String massage = Marshaller.requestToString(requestDTO);
         String signature = encryptionService.sign(massage);
 
@@ -42,7 +47,7 @@ public class RequestDispatcherService {
                 requestEntity,
                 String.class);
 
-        return responseHandler.handle(responseEntity);
+        return responseHandler.handle(responseEntity, prettyPrintResponse);
     }
 
     private HttpEntity<String> makeRequestEntity(String request, String signature) {
@@ -54,9 +59,9 @@ public class RequestDispatcherService {
     }
 
     private void printRequest(String request, String signature) {
-        Logger.info("\n#################################################");
-        Logger.info("# REQUEST SIGNATURE: " + signature);
-        Logger.info("####  REQUEST:  ####################################");
+        Logger.info("\n##################################################");
+        Logger.info("#  REQUEST SIGNATURE: " + signature);
+        Logger.info("####  REQUEST:  #####################################");
         Logger.info(request);
     }
 }
