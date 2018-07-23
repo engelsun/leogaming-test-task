@@ -14,6 +14,7 @@ public class ZonedDateTimeAdapter extends XmlAdapter<String, ZonedDateTime> {
 
     @Override
     public String marshal(ZonedDateTime v) throws Exception {
+        if (v == null) return null;
         return v.format(formatter);
     }
 }

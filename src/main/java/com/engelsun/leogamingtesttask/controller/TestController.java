@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.SignatureException;
+
 @RestController
 @RequestMapping(path = "/test")
 public class TestController {
@@ -20,7 +22,7 @@ public class TestController {
     }
 
     @PostMapping(path = "/accept", produces = "application/xml")
-    public ResponseDTO accept(@RequestBody RequestDTO requestDTO) {
+    public ResponseDTO accept(@RequestBody RequestDTO requestDTO) throws SignatureException {
         return requestDispatcherService.redirect(requestDTO);
     }
 }

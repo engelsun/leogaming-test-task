@@ -1,93 +1,14 @@
 package com.engelsun.leogamingtesttask.util;
 
-import com.engelsun.leogamingtesttask.dto.request.PaymentDTO;
 import com.engelsun.leogamingtesttask.dto.request.RequestDTO;
-import com.engelsun.leogamingtesttask.dto.request.StatusDTO;
-import com.engelsun.leogamingtesttask.dto.request.VerifyDTO;
 import com.engelsun.leogamingtesttask.dto.response.ResponseDTO;
-import com.engelsun.leogamingtesttask.dto.response.ResultDTO;
 import org.junit.Test;
 
-import java.time.ZonedDateTime;
-import java.util.Arrays;
-import java.util.Collections;
-
-import static org.junit.Assert.*;
+import static com.engelsun.leogamingtesttask.util.TestData.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class MarshallerTest {
-
-    private VerifyDTO verifyDTO = VerifyDTO.builder()
-            .service(4390)
-            .account("12345")
-            .build();
-
-    private PaymentDTO paymentDTO1 = PaymentDTO.builder()
-            .id(1L)
-            .sum(1000)
-            .check(999)
-            .service(4390)
-            .account("12345")
-            .date(ZonedDateTime.parse("2018-07-23T08:38:10+03:00"))
-            .build();
-    private PaymentDTO paymentDTO2 = PaymentDTO.builder()
-            .id(2L)
-            .sum(1000)
-            .check(1000)
-            .service(4390)
-            .account("12346")
-            .date(ZonedDateTime.parse("2018-07-23T08:38:10+03:00"))
-            .build();
-
-    private StatusDTO statusDTO1 = StatusDTO.builder()
-            .id(1L)
-            .build();
-    private StatusDTO statusDTO2 = StatusDTO.builder()
-            .id(2L)
-            .build();
-
-    private ResultDTO resultDTO1 = ResultDTO.builder()
-            .id(1L)
-            .state(60)
-            .subState(0)
-            .code(0)
-            .finale(1)
-            .trans(123456789)
-            .serverTime(ZonedDateTime.parse("2018-07-23T08:38:10+03:00"))
-            .build();
-    private ResultDTO resultDTO2 = ResultDTO.builder()
-            .id(2L)
-            .state(60)
-            .subState(0)
-            .code(30)
-            .finale(1)
-            .trans(123456799)
-            .serverTime(ZonedDateTime.parse("2018-07-23T08:38:10+03:00"))
-            .build();
-
-    private RequestDTO requestVerifyDTO = RequestDTO.builder()
-            .point(327)
-            .body(Collections.singletonList(verifyDTO))
-            .build();
-
-    private RequestDTO requestPaymentDTO = RequestDTO.builder()
-            .point(327)
-            .body(Arrays.asList(paymentDTO1, paymentDTO2))
-            .build();
-
-    private RequestDTO requestStatusDTO = RequestDTO.builder()
-            .point(327)
-            .body(Arrays.asList(statusDTO1, statusDTO2))
-            .build();
-
-    private ResponseDTO responseVerifyDTO = ResponseDTO.builder()
-            .result(Collections.singletonList(resultDTO1))
-            .build();
-    private ResponseDTO responsePaymentDTO = ResponseDTO.builder()
-            .result(Arrays.asList(resultDTO1, resultDTO2))
-            .build();
-    private ResponseDTO responseStatusDTO = ResponseDTO.builder()
-            .result(Arrays.asList(resultDTO1, resultDTO2))
-            .build();
 
     @Test
     public void requestVerifyToStringNotNull() {

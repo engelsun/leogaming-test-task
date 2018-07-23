@@ -3,11 +3,12 @@ package com.engelsun.leogamingtesttask.service;
 import com.engelsun.leogamingtesttask.util.EncryptionKeys;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.security.Signature;
 import java.security.SignatureException;
 
-@Component
+@Service
 public class EncryptionService {
 
     public String sign(String message) throws SignatureException {

@@ -1,33 +1,53 @@
 package com.engelsun.leogamingtesttask.service;
 
-import com.engelsun.leogamingtesttask.dto.request.PaymentDTO;
 import com.engelsun.leogamingtesttask.dto.request.RequestDTO;
 import com.engelsun.leogamingtesttask.dto.response.ResponseDTO;
-import com.engelsun.leogamingtesttask.dto.response.ResultDTO;
-import org.springframework.stereotype.Component;
+import com.engelsun.leogamingtesttask.util.Marshaller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
-import java.time.ZonedDateTime;
-import java.util.Collections;
+import java.security.SignatureException;
 
-@Component
+@Service
 public class RequestDispatcherService {
+    @Value("${input-data.url}")
+    private String URL;
 
-    public ResponseDTO redirect(RequestDTO requestDTO) {
-        PaymentDTO requestBodyDTO = (PaymentDTO) requestDTO.getBody().get(0);
-        return ResponseDTO.builder()
-                .result(Collections.singletonList(
-                        ResultDTO.builder()
-                                .id(requestBodyDTO.getId())
-                                .state(60)
-                                .subState(0)
-                                .code(0)
-                                .finale(1)
-                                .trans(123456789)
-                                .service(requestBodyDTO.getService())
-                                .serverTime(ZonedDateTime.now())
-                                .build()
-                        )
-                )
-                .build();
+    @Autowired
+    private EncryptionService encryptionService;
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    public ResponseDTO redirect(RequestDTO requestDTO) throws SignatureException {
+        String request = Marshaller.requestToString(requestDTO);
+        String massage = encryptionService.sign(request);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("PayLogic-Signature", massage);
+        headers.setContentType(MediaType.APPLICATION_XML);
+
+        HttpEntity<String> requestEntity = new HttpEntity<>(request, headers);
+
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(
+                URL,
+                requestEntity,
+                String.class
+        );
+        ResponseDTO responseDTO;
+        if (responseEntity.hasBody()) {
+            String body = responseEntity.getBody();
+            System.out.println(" response " + body);
+            responseDTO = Marshaller.stringToResponse(body);
+            System.out.println("responedtO = " + responseDTO);
+            return responseDTO;
+        }
+        return null;
     }
 }
