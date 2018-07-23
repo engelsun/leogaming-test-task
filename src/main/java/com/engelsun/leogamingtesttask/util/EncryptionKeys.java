@@ -15,7 +15,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 
 public class EncryptionKeys {
-    private static final String PUBLIC_KEY_FILE = "public2.pem";
+    private static final String PUBLIC_KEY_FILE = "public.pem";
     private static final String PRIVATE_KEY_FILE = "private.pem";
 
     public static PublicKey getPublic() throws IOException, NoSuchAlgorithmException, InvalidKeySpecException, URISyntaxException {

@@ -11,10 +11,13 @@ import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.Collections;
 
+import static com.engelsun.leogamingtesttask.util.Props.POINT;
+import static com.engelsun.leogamingtesttask.util.Props.SERVICE;
+
 public class TestData {
 
     public static VerifyDTO verifyDTO = VerifyDTO.builder()
-            .service(4390)
+            .service(SERVICE)
             .account("12345")
             .build();
 
@@ -22,7 +25,7 @@ public class TestData {
             .id(1L)
             .sum(1000)
             .check(999)
-            .service(4390)
+            .service(SERVICE)
             .account("12345")
 //            .date(ZonedDateTime.parse("2018-07-23T08:38:10+03:00"))
             .date(ZonedDateTime.now())
@@ -31,7 +34,7 @@ public class TestData {
             .id(2L)
             .sum(1000)
             .check(1000)
-            .service(4390)
+            .service(SERVICE)
             .account("12346")
 //            .date(ZonedDateTime.parse("2018-07-23T08:38:10+03:00"))
             .date(ZonedDateTime.now())
@@ -66,17 +69,17 @@ public class TestData {
             .build();
 
     public static RequestDTO requestVerifyDTO = RequestDTO.builder()
-            .point(327)
+            .point(POINT)
             .body(Collections.singletonList(verifyDTO))
             .build();
 
     public static RequestDTO requestPaymentDTO = RequestDTO.builder()
-            .point(327)
+            .point(POINT)
             .body(Arrays.asList(paymentDTO1, paymentDTO2))
             .build();
 
     public static RequestDTO requestStatusDTO = RequestDTO.builder()
-            .point(327)
+            .point(POINT)
             .body(Arrays.asList(statusDTO1, statusDTO2))
             .build();
 

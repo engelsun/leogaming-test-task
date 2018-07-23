@@ -4,9 +4,8 @@ import com.engelsun.leogamingtesttask.dto.request.RequestDTO;
 import com.engelsun.leogamingtesttask.dto.response.ResponseDTO;
 import com.engelsun.leogamingtesttask.util.Logger;
 import com.engelsun.leogamingtesttask.util.Marshaller;
-
+import com.engelsun.leogamingtesttask.util.Props;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -18,11 +17,6 @@ import java.security.SignatureException;
 
 @Service
 public class RequestDispatcherService {
-    @Value("${input-data.url}")
-    private String URL;
-
-    @Value("${input-data.header}")
-    private String HEADER;
 
     private EncryptionService encryptionService;
     private RestTemplate restTemplate;
@@ -44,7 +38,7 @@ public class RequestDispatcherService {
         HttpEntity<String> requestEntity = makeRequestEntity(massage, signature);
 
         ResponseEntity<String> responseEntity = restTemplate.postForEntity(
-                URL,
+                Props.URL,
                 requestEntity,
                 String.class);
 
@@ -53,14 +47,14 @@ public class RequestDispatcherService {
 
     private HttpEntity<String> makeRequestEntity(String request, String signature) {
         HttpHeaders headers = new HttpHeaders();
-        headers.add(HEADER, signature);
+        headers.add(Props.HEADER, signature);
         headers.setContentType(MediaType.APPLICATION_XML);
 
         return new HttpEntity<>(request, headers);
     }
 
     private void printRequest(String request, String signature) {
-        Logger.info("#################################################");
+        Logger.info("\n#################################################");
         Logger.info("# REQUEST SIGNATURE: " + signature);
         Logger.info("####  REQUEST:  ####################################");
         Logger.info(request);

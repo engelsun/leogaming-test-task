@@ -8,9 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.security.SignatureException;
 
+@ComponentScan("com.engelsun.leogamingtesttask")
 @SpringBootApplication
 public class Main implements CommandLineRunner {
 
@@ -25,11 +27,8 @@ public class Main implements CommandLineRunner {
     public void run(String... args) throws Exception {
         RequestDispatcherService service = context.getBean(RequestDispatcherService.class);
 
-        Logger.info("");
         service.redirect(TestData.requestVerifyDTO);
-        Logger.info("");
         service.redirect(TestData.requestPaymentDTO);
-        Logger.info("");
         service.redirect(TestData.requestStatusDTO);
     }
 }

@@ -3,8 +3,8 @@ package com.engelsun.leogamingtesttask.service;
 import com.engelsun.leogamingtesttask.dto.response.ResponseDTO;
 import com.engelsun.leogamingtesttask.util.Logger;
 import com.engelsun.leogamingtesttask.util.Marshaller;
+import com.engelsun.leogamingtesttask.util.Props;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -14,9 +14,6 @@ import java.util.Optional;
 
 @Service
 public class ResponseHandler {
-    @Value("${input-data.header}")
-    private String HEADER;
-
     @Autowired
     private EncryptionService encryptionService;
 
@@ -25,7 +22,7 @@ public class ResponseHandler {
             String massage = responseEntity.getBody();
 
             HttpHeaders headers = responseEntity.getHeaders();
-            if (headers.containsKey(HEADER)) {
+            if (headers.containsKey(Props.HEADER)) {
                 boolean isTrue = verifySignature(massage, headers);
                 if (isTrue) {
                     Logger.info("############ ....VERIFYING IS CONFIRMED ##############");
@@ -41,7 +38,7 @@ public class ResponseHandler {
     }
 
     private boolean verifySignature(String massage, HttpHeaders headers) throws SignatureException {
-        Optional<String> signature = Optional.ofNullable(headers.get(HEADER).get(0));
+        Optional<String> signature = Optional.ofNullable(headers.get(Props.HEADER).get(0));
         Logger.info("#################################################");
         Logger.info("#RESPONSE SIGNATURE = " + signature.get());
         Logger.info("#VERIFYING.... #####################################");

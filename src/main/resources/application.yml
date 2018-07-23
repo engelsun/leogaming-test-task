@@ -1,5 +1,7 @@
-input-data:
-  url: https://test.lgaming.net/external/extended
-  header: PayLogic-Signature
-  point: 327
-  service: 4390
+server:
+  port: 8443
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-password: tomcat8080
+    keyStoreType: PKCS12
+    keyAlias: tomcat2
