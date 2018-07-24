@@ -6,7 +6,7 @@ Installing:
 ```
 src\main\java\com\engelsun\leogamingtesttask\Main.java
 ```
-#### - Then you will see in the console an output like this snippet:
+#### - Then you will see in the console an output like this snippet three times:
 ![screenshot_5](https://user-images.githubusercontent.com/26378027/43102106-e03bc172-8ed2-11e8-816e-92c8730c1a8a.png)
 
 #### 4. If you want more tests, you will may send a POST requests via apps like Postman on the url:
@@ -25,4 +25,4 @@ content-type = application/xml
 - then finally click on the Send Button. You will see something like this:
 ![screenshot_3](https://user-images.githubusercontent.com/26378027/43097446-ca5e3532-8ec4-11e8-9df8-4d8ba527f9e6.png)
 
-#### 5. Install [Lombok plugin](https://projectlombok.org/setup/overview) to integrate lombok features for your IDE, such as builder(), which is used in the TestData class 
+#### 5. Optional: install [Lombok plugin](https://projectlombok.org/setup/overview) to integrate lombok features for your IDE, such as builder(), which is used in the TestData class 
