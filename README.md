@@ -9,7 +9,7 @@ src\main\java\com\engelsun\leogamingtesttask\Main.java
 #### - Then you will see in the console an output like this snippet three times:
 ![screenshot_5](https://user-images.githubusercontent.com/26378027/43102106-e03bc172-8ed2-11e8-816e-92c8730c1a8a.png)
 
-#### 4. If you want more tests, you will may send a POST requests via apps like Postman on the url:
+#### 4. If you want more tests, you will may send a POST requests via apps like [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop/related) on the url:
 ###
 ```
 https://localhost:8443/test/accept
